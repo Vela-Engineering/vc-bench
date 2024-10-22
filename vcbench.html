@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>VCBench: VC-focused Model Benchmarks</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        canvas {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>VCBench: VC-focused Model Benchmarks</h1>
+        <p>An open platform to benchmark precision of AI models for venture capital.</p>
+    </header>
+
+    <section id="results">
+        <h2>Seed Precision Benchmarks</h2>
+        <p>The $100K and $3M indexes are investing strategies of investing in any startup that raised more than $100K and $3M, respectively. </p>
+        <p>Y Combinator and Tier-1 VCs are human pickers. The precision at pre-seed, angel and seed stage financing vary between 3%-5% for best human pickers.</p>
+        <p>For the Vela AI model (GPTree), the only input is the founder's background. </p>
+        <canvas id="benchmarkChart" width="600" height="400"></canvas>
+    </section>
+
+    <section id="methodology">
+        <h2>Methodology</h2>
+        <p>This model aims to predict the success of startups based on the founding team's background, focusing solely on instances where the model makes a decision by analyzing a single founder's background. Our analysis considers inception-stage investments, which are earlier than seed-stage, with precision calculated using real-world outcomes such as $500M+ M&A, $500M+ IPO valuations and $500M+ raises.</p>
+        <p>Vela AI's model (GPTree) focuses specifically on evaluating founder characteristics, employing sophisticated machine learning and LLM techniques to measure the likelihood of achieving outlier success. These calculations are based on historical data, benchmarked against well-known accelerators and venture capitalists for comparison.</p>
+    </section>
+
+    <section id="submission">
+        <h2>Submit Your Model</h2>
+        <p>We encourage researchers and other VC firms to submit their models for evaluation. Please contact us at <a href="mailto:benchmark@vela.partners">benchmark@vela.partners</a> with details about your model, including methodology and performance metrics.</p>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const ctx = document.getElementById('benchmarkChart').getContext('2d');
+        const benchmarkChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['$100K Index', '$3M Index', 'Y Combinator (Human picker)', 'Tier-1 VCs (Human pickers)', 'Vela AI (GPTree)'],
+                datasets: [{
+                    label: 'Precision (%)',
+                    data: [1.9, 3.0, 3.2, 5.6, 19],
+                    backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Precision (%)'
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: ''
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
